@@ -1,76 +1,46 @@
-# Web-Scraper
-# Async URL Fetcher with Retry Logic
+Async Web Scraper 
+This project is a full-featured asynchronous web scraper built with Python. It’s designed to efficiently fetch and parse content from multiple URLs using aiohttp and asyncio. With built-in retry logic, structured logging, and customizable parsing, it provides a solid foundation for scraping large volumes of data with speed and reliability.
 
-This project is an asynchronous Python script that fetches web page content using `aiohttp`, with built-in retry logic and exponential backoff for handling temporary failures like timeouts or bad HTTP status codes.
+Features
+Asynchronous Fetching: Utilizes Python's asyncio and aiohttp to send non-blocking HTTP requests for high-speed performance.
 
-## 🔧 Features
+Retry Logic with Exponential Backoff: Automatically retries failed requests up to three times, waiting longer between each attempt.
 
-- Asynchronous HTTP requests with `aiohttp`
-- Retry logic with customizable max retries
-- Exponential backoff between retries
-- Logs errors and warnings for failed attempts
-- Gracefully returns `None` if all retries fail
+Error Handling: Gracefully handles HTTP errors and exceptions, logging them for later review.
 
-## 🧪 Example Usage
+HTML Parsing: Extracts specific content from HTML pages using BeautifulSoup.
 
-```python
-import aiohttp
-import asyncio
-from your_module import fetch_with_retries  # Replace with actual function name/path
+Logging: Keeps a detailed log of fetch results, including errors and skipped URLs.
 
-async def main():
-    url = "https://example.com"
-    async with aiohttp.ClientSession() as session:
-        content = await fetch_with_retries(session, url)
-        if content:
-            print("Page content received!")
-        else:
-            print("Failed to fetch the page after retries.")
+Command-Line Execution: Can be run directly via a Python script, and adapted for various use cases.
 
-asyncio.run(main())
-📝 Function Overview
-python
-Copy
-Edit
-async def fetch_with_retries(session, url):
-    ...
-session: An aiohttp.ClientSession object
+Modular Structure: Easy to extend with custom parsing logic, URL sources, and data handling methods.
 
-url: The URL to fetch
+How It Works
+URL List: A list of URLs is provided manually or loaded from a file.
 
-Returns the page content (str) or None if all attempts fail
+Asynchronous Requests: Each URL is fetched concurrently using a shared aiohttp session.
 
-📦 Requirements
-Python 3.7+
+Parsing: The HTML content is parsed to extract relevant data (such as page titles or structured content).
 
-aiohttp
+Logging and Output: Errors, responses, and extracted information are logged or printed for further use.
 
-asyncio (standard in Python 3.7+)
+Requirements
+Python 3.7 or higher
 
-Install dependencies:
+aiohttp for asynchronous requests
 
-bash
-Copy
-Edit
-pip install aiohttp
-📁 File Structure
-bash
-Copy
-Edit
-/project-root
-│
-├── fetcher.py           # Contains the async retry logic
-├── main.py              # Example usage
-├── README.md            # You're here!
-└── requirements.txt     # Optional: add aiohttp here
-✅ To Do
- Add unit tests
+BeautifulSoup (via bs4) for parsing HTML
 
- Allow custom backoff strategy
+asyncio (built-in) for managing concurrent operations
 
- Support other HTTP methods (POST, PUT, etc.)
+Dependencies can be installed using pip.
 
-💡 Notes
-Retry delays increase with each attempt (1s, 2s, etc.)
+Use Cases
+Web scraping and crawling
 
-On HTTP error or exception, it retries up to 3 times before giving u
+Monitoring websites for changes
+
+Collecting public data from multiple sources
+
+Learning asynchronous programming with real-world examples
